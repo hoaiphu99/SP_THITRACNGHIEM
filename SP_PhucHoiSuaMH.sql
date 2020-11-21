@@ -17,7 +17,7 @@ begin
 	--còn 1 trường hợp làm cho sp sửa lỗi đó là ai đó xoá hoặc sửa mã cái môn học đã sửa, chỉ cần xét mã vì câu lệnh update chỉ cần mã
 	if not exists(SELECT MAMH FROM  dbo.MONHOC WHERE MAMH = @NewMaMH)
 		begin
-			set @ErorStr = N'Phục hồi sửa thất bại! Mã môn học "'+ rtrim(convert(nvarchar(200),@NewMaMH)) +N'" đã sửa lúc trước không tồn tại nên không thể sửa! Đã có người khác hiệu chỉnh!' 
+			set @ErorStr = N'Phục hồi sửa thất bại! Mã môn học mới "'+ rtrim(convert(nvarchar(200),@NewMaMH)) +N'" đã sửa lúc trước không tồn tại nên không thể sửa! Đã có người khác hiệu chỉnh!' 
 			raiserror (@ErorStr,16,1)
 			return
 		end	
@@ -26,7 +26,7 @@ begin
 		if (@NewMaMH != @OldMaMH)
 			if exists(SELECT MAMH FROM  dbo.MONHOC WHERE MAMH = @OldMaMH)
 				begin
-					set @ErorStr = N'Phục hồi sửa thất bại! Mã môn học "'+ rtrim(convert(nvarchar(200),@OldMaMH)) +N'" đã sửa lúc trước đang tồn tại nên không thể sửa! Đã có người khác hiệu chỉnh!' 
+					set @ErorStr = N'Phục hồi sửa thất bại! Mã môn học cũ "'+ rtrim(convert(nvarchar(200),@OldMaMH)) +N'" đã sửa lúc trước đang tồn tại nên không thể sửa! Đã có người khác hiệu chỉnh!' 
 					raiserror (@ErorStr,16,1)
 					return
 				end	

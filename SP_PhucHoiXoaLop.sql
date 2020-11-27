@@ -1,7 +1,7 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_PhucHoiXoaLop]    Script Date: 11/24/2020 9:54:42 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_PhucHoiXoaLop]    Script Date: 11/27/2020 11:35:05 AM ******/
 SET ANSI_NULLS ON
 GO
 

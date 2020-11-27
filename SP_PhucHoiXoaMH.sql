@@ -1,7 +1,7 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_PhucHoiXoaMH]    Script Date: 11/21/2020 10:28:43 PM ******/
+/****** Object:  StoredProcedure [dbo].[SP_PhucHoiXoaMH]    Script Date: 11/27/2020 11:35:19 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -14,6 +14,7 @@ as
 begin
 	declare @ErorStr nvarchar(200)
 
+	--ko có khoá ngoại nên ko ktra khoá ngoại
 	--nếu như định thêm lại nhưng mã môn học đã xoá đang có
 	if exists(SELECT MAMH FROM  dbo.MONHOC WHERE MAMH = @MaMH)
 		begin

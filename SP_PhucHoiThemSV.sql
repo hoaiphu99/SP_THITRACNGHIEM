@@ -16,7 +16,7 @@ begin
 
 	--đã thêm thì giờ xoá, kiếm thấy mã sinh viên thì mới xoá đc
 	if exists(SELECT MASV FROM  dbo.SINHVIEN WHERE MASV = @NewMaSV)		
-   			delete  dbo.GIAOVIEN where MAGV = @NewMaSV
+   			delete  dbo.SINHVIEN where MASV = @NewMaSV
 	else
 		begin
 			set @ErorStr = N'Phục hồi thêm thất bại! Mã sinh viên "'+ rtrim(convert(nvarchar(200),@NewMaSV)) +N'" đã thêm bây giờ không tồn tại nên không thể xoá! Đã có người khác hiệu chỉnh!' 

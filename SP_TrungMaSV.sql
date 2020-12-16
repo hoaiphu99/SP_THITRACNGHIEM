@@ -1,7 +1,7 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_TrungMaSV]    Script Date: 12/16/2020 14:22:56 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TrungMaSV]    Script Date: 12/16/2020 15:25:38 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,16 @@ CREATE PROCEDURE [dbo].[SP_TrungMaSV]
 AS
 BEGIN
 	IF EXISTS(SELECT MASV FROM  dbo.SINHVIEN WHERE MASV = @MASV)
-   		RAISERROR ('Mã sinh viên đã tồn tại!',16,1)
+   		BEGIN
+			RAISERROR ('Mã sinh viên đã tồn tại!',16,1)
+			RETURN 
+		END 
+	IF EXISTS(SELECT MASV FROM LINK1.TN_CSDLPT.dbo.SINHVIEN WHERE MASV = @MASV)
+		BEGIN
+			RAISERROR ('Mã sinh viên đã tồn tại!',16,1)
+			RETURN 
+		END
 END
+
 GO
 

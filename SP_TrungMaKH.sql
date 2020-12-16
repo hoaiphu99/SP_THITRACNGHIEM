@@ -1,7 +1,7 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_TrungMaKH]    Script Date: 12/16/2020 14:22:35 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TrungMaKH]    Script Date: 12/16/2020 15:25:18 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,15 @@ CREATE PROCEDURE [dbo].[SP_TrungMaKH]
 AS
 BEGIN
 	IF EXISTS(SELECT MAKH FROM  dbo.KHOA WHERE MAKH = @MAKH)
-   		RAISERROR ('Mã khoa đã tồn tại!',16,1)
+	BEGIN
+		RAISERROR ('Mã khoa đã tồn tại!',16,1)
+		RETURN
+	END
+   	IF EXISTS(SELECT MAKH FROM  LINK1.TN_CSDLPT.dbo.KHOA WHERE MAKH = @MAKH)
+	BEGIN
+		RAISERROR ('Mã khoa đã tồn tại!',16,1)
+		RETURN
+	END
 END
 GO
 

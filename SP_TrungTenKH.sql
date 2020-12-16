@@ -1,7 +1,7 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_TrungTenKH]    Script Date: 12/16/2020 14:23:15 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TrungTenKH]    Script Date: 12/16/2020 15:25:49 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,15 @@ CREATE PROCEDURE [dbo].[SP_TrungTenKH]
 AS
 BEGIN
 	IF EXISTS(SELECT TENKH FROM  dbo.KHOA WHERE TENKH = @TENKH)
-   		RAISERROR ('Tên khoa đã tồn tại!',16,1)
+	BEGIN
+		RAISERROR ('Tên khoa đã tồn tại!',16,1)
+		RETURN
+	END
+   	IF EXISTS(SELECT TENKH FROM  LINK1.TN_CSDLPT.dbo.KHOA WHERE TENKH = @TENKH)
+	BEGIN
+		RAISERROR ('Tên khoa đã tồn tại!',16,1)
+		RETURN
+	END
 END
 GO
 

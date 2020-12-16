@@ -1,7 +1,7 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_TrungMaLop]    Script Date: 12/16/2020 14:22:44 ******/
+/****** Object:  StoredProcedure [dbo].[SP_TrungMaLop]    Script Date: 12/16/2020 15:25:28 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,15 @@ CREATE PROCEDURE [dbo].[SP_TrungMaLop]
 AS
 BEGIN
 	IF EXISTS(SELECT MALOP FROM  dbo.LOP WHERE MALOP = @MALOP)
-   		RAISERROR ('Mã lớp đã tồn tại!',16,1)
+	BEGIN
+		RAISERROR ('Mã lớp đã tồn tại!',16,1)
+		RETURN
+	END
+   	IF EXISTS(SELECT MALOP FROM  LINK1.TN_CSDLPT.dbo.LOP WHERE MALOP = @MALOP)
+	BEGIN
+		RAISERROR ('Mã lớp đã tồn tại!',16,1)
+		RETURN
+	END
 END
 GO
 

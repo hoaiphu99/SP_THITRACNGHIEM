@@ -1,0 +1,19 @@
+USE [TN_CSDLPT]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_TrungTenKH]    Script Date: 12/16/2020 14:23:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[SP_TrungTenKH]
+	@TENKH NVARCHAR(50)
+AS
+BEGIN
+	IF EXISTS(SELECT TENKH FROM  dbo.KHOA WHERE TENKH = @TENKH)
+   		RAISERROR ('Tên khoa đã tồn tại!',16,1)
+END
+GO
+

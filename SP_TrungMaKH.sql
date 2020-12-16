@@ -1,0 +1,19 @@
+USE [TN_CSDLPT]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_TrungMaKH]    Script Date: 12/16/2020 14:22:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[SP_TrungMaKH]
+	@MAKH CHAR(8)
+AS
+BEGIN
+	IF EXISTS(SELECT MAKH FROM  dbo.KHOA WHERE MAKH = @MAKH)
+   		RAISERROR ('Mã khoa đã tồn tại!',16,1)
+END
+GO
+

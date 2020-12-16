@@ -1,0 +1,25 @@
+USE [TN_CSDLPT]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_KTMaLop]    Script Date: 12/15/2020 17:18:26 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[SP_KTMaLop]
+	@MALOP NCHAR(8)
+AS
+BEGIN
+	IF EXISTS(SELECT * FROM dbo.SINHVIEN WHERE MALOP = @MALOP)
+	BEGIN
+		RETURN 1
+	END
+	ELSE
+    BEGIN
+    	RAISERROR('Sinh viên không thuộc lớp này!', 16, 1)
+    END
+END
+GO
+

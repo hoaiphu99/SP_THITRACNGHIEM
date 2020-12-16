@@ -1,0 +1,19 @@
+USE [TN_CSDLPT]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_TrungTenLop]    Script Date: 12/16/2020 14:23:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[SP_TrungTenLop]
+	@TENLOP NVARCHAR(50)
+AS
+BEGIN
+	IF EXISTS(SELECT TENLOP FROM  dbo.LOP WHERE TENLOP = @TENLOP)
+   		RAISERROR ('Tên lớp đã tồn tại!',16,1)
+END
+GO
+

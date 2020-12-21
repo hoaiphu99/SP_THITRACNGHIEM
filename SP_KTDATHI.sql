@@ -1,20 +1,22 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_KTDATHI]    Script Date: 12/15/2020 17:17:37 ******/
+/****** Object:  StoredProcedure [dbo].[SP_KTDATHI]    Script Date: 12/21/2020 11:13:44 AM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[SP_KTDATHI] (@MASV NCHAR(8), @MAMH NCHAR(5), @LAN INT)
+
+ALTER PROCEDURE [dbo].[SP_KTDATHI] (@MASV NCHAR(8), @MAMH NCHAR(5), @LAN INT)
 AS
 BEGIN
 	IF EXISTS(SELECT * FROM dbo.BANGDIEM WHERE MAMH = @MAMH AND MASV = @MASV AND LAN = @LAN)
-		RAISERROR ('Bạn đã thi môn này rồi!', 16, 1)
+		RAISERROR ('Lỗi! Môn này đã thi!', 16, 1)
 	ELSE
 		RETURN 1
 END
+
 GO
 

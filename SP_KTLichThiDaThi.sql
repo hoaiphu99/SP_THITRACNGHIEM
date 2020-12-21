@@ -1,0 +1,23 @@
+USE [TN_CSDLPT]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_KTLichThiDaThi]    Script Date: 12/21/2020 11:08:38 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[SP_KTLichThiDaThi] (@MAMH NCHAR(5) ,@MALOP NCHAR(8), @LAN SMALLINT)
+AS
+BEGIN
+	IF EXISTS(
+		SELECT * 
+		FROM dbo.BANGDIEM
+		WHERE MAMH = @MAMH AND LAN = @LAN AND MASV IN(SELECT MASV FROM SINHVIEN WHERE MALOP = @MALOP))
+	BEGIN
+		RAISERROR('Sinh viên đã thi! Không được phép hiệu chỉnh!', 16, 1)
+	END
+END
+GO
+

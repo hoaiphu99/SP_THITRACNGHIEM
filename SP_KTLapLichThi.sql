@@ -1,7 +1,7 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_KTLapLichThi]    Script Date: 12/21/2020 11:32:45 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_KTLapLichThi]    Script Date: 12/21/2020 11:09:01 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -28,8 +28,8 @@ BEGIN
 	BEGIN
 		IF NOT EXISTS(
 		SELECT * 
-		FROM dbo.BANGDIEM BD JOIN dbo.GIAOVIEN_DANGKY GVDK
-		ON GVDK.MAMH = BD.MAMH AND GVDK.LAN = BD.LAN AND MASV IN(SELECT MASV FROM SINHVIEN WHERE MALOP = @MALOP) AND BD.MAMH = @MAMH AND MALOP = @MALOP AND BD.LAN = 1)
+		FROM dbo.BANGDIEM 
+		WHERE MAMH = @MAMH AND LAN = 1 AND MASV IN(SELECT MASV FROM SINHVIEN WHERE MALOP = @MALOP))
 		BEGIN
 			RAISERROR('Lần 1 chưa thi, không được đăng ký lần 2!', 16, 1)
 			RETURN

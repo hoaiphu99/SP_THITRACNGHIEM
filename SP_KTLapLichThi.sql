@@ -1,7 +1,7 @@
 USE [TN_CSDLPT]
 GO
 
-/****** Object:  StoredProcedure [dbo].[SP_KTLapLichThi]    Script Date: 12/21/2020 11:14:45 AM ******/
+/****** Object:  StoredProcedure [dbo].[SP_KTLapLichThi]    Script Date: 12/21/2020 11:32:45 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -19,6 +19,7 @@ BEGIN
 	IF EXISTS(SELECT * FROM dbo.GIAOVIEN_DANGKY WHERE MAMH = @MAMH AND MALOP = @MALOP AND LAN = @LAN)
 	BEGIN
 		RAISERROR('Đã lập lịch thi cho môn này!', 16, 1)
+		RETURN
 	END
     
 	--nếu như chưa đăng ký 
@@ -31,11 +32,13 @@ BEGIN
 		ON GVDK.MAMH = BD.MAMH AND GVDK.LAN = BD.LAN AND MASV IN(SELECT MASV FROM SINHVIEN WHERE MALOP = @MALOP) AND BD.MAMH = @MAMH AND MALOP = @MALOP AND BD.LAN = 1)
 		BEGIN
 			RAISERROR('Lần 1 chưa thi, không được đăng ký lần 2!', 16, 1)
+			RETURN
 		END
 
 		IF NOT EXISTS(SELECT * FROM dbo.GIAOVIEN_DANGKY WHERE MAMH = @MAMH AND MALOP = @MALOP AND LAN = 1 AND NGAYTHI < Convert(datetime, @NGAYTHI))
 		BEGIN
 			RAISERROR('Ngày thi lần 2 phải lớn hơn ngày thi của lần 1!', 16, 1)
+			RETURN
 		END
 	END
 END

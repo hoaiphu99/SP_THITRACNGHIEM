@@ -1,0 +1,19 @@
+USE [TN_CSDLPT]
+GO
+
+/****** Object:  StoredProcedure [dbo].[SP_TimIDBangDiem]    Script Date: 12/22/2020 3:42:51 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROC [dbo].[SP_TimIDBangDiem]
+AS
+BEGIN
+	SELECT ISNULL(MAX(IDBD), 0) + 1 FROM BANGDIEM
+END
+
+GO
+
